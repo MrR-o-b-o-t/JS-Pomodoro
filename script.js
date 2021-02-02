@@ -1,6 +1,8 @@
 let start = document.getElementById('start');
 let reset = document.getElementById('reset');
 let stop = document.getElementById('stop');
+let countNum = 0;
+let counter = 0;
 
 let focusInputField = document.getElementById('focus-input');
 
@@ -12,6 +14,7 @@ let bs = document.getElementById('b-seconds');
 
 let startTimer;
 
+// Start timer button
 start.addEventListener('click', function(){
   if(startTimer === undefined) {
     startTimer = setInterval(timer, 1000)
@@ -21,9 +24,9 @@ start.addEventListener('click', function(){
   }
 })
 
+// User work time input 
 focusInputField.addEventListener('input', function() {
   if(startTimer === undefined ) {
-    wm.innerText = focusInputField.value;
     wm.innerText = focusInputField.value;
      if(wm.innerText < 10) {
        wm.innerText = "0" + wm.innerText;
@@ -33,6 +36,7 @@ focusInputField.addEventListener('input', function() {
   }
 })
 
+// Stop timer button
 stop.addEventListener('click', function(){
   if(startTimer != undefined) {
     clearInterval(startTimer);
@@ -42,6 +46,7 @@ stop.addEventListener('click', function(){
   }
 })
 
+// Reset timer button
 reset.addEventListener('click', function(){
   clearInterval(startTimer);
   startTimer = undefined;
@@ -51,10 +56,11 @@ reset.addEventListener('click', function(){
   bs.innerText = "00";
 })
 
+// Decrement seconds and minutes after timer start
 function timer() {
   if(ws.innerText != 0) {
     ws.innerText--;
-  } else if(wm.innerText != 0 && ws.innerText == 0) {
+  }else if(wm.innerText != 0 && ws.innerText == 0) {
     ws.innerText = 59;
     wm.innerText--;
   }
@@ -65,16 +71,16 @@ function timer() {
     } else if(bm.innerText != 0 && bs.innerText == 0){
       bs.innerText = 59;
       bm.innerText--;
+    } else if (bm.innerText == 0 && bs.innerText == 0) {
+      clearInterval(startTimer);
+      clearInterval(stop)
+      startTimer = undefined;
+      wm.innerText = "00";
+      ws.innerText = "00";
+      bm.innerText = 1;
+      bs.innerText = "00";
+      counter++;
+      document.getElementById('counter-count').innerText = counter;
     }
-  }
-
-  if(wm.innerText == 0 && ws.innerText == 0 && bm.innerText == 0 && bs.innerText == 0){
-    wm.innerText == 25;
-    ws.innerText == "00";
-
-    bm.innerText == 1;
-    bs.innerText == "00";
-
-    document.getElementById('counter-count').innerText++;
   }
 }
