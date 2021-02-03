@@ -5,6 +5,7 @@ let countNum = 0;
 let counter = 0;
 
 let focusInputField = document.getElementById('focus-input');
+let breakInputField = document.getElementById('focus-break');
 
 let wm = document.getElementById('w-minutes');
 let ws = document.getElementById('w-seconds');
@@ -16,9 +17,15 @@ let startTimer;
 
 // Start timer button
 start.addEventListener('click', function(){
-  if(startTimer === undefined) {
+  if (wm.innerText <= 0 && ws.innerText == 0) {
+    alert("Please enter focus time!")
+  } else if(bm.innerText <= 0 && bs.innerText == 0) {
+    alert("Please enter break time!")
+  }else if(startTimer === undefined) {
     startTimer = setInterval(timer, 1000)
     focusInputField.value = '';
+    breakInputField.value = '';
+    clearInterval(stop)
   } else {
     alert("Timer is already running!")
   }
@@ -28,12 +35,21 @@ start.addEventListener('click', function(){
 focusInputField.addEventListener('input', function() {
   if(startTimer === undefined ) {
     wm.innerText = focusInputField.value;
-     if(wm.innerText < 10) {
-       wm.innerText = "0" + wm.innerText;
-     } else if (focusInputField.value === undefined) {
-       wm.innerText = "00";
+     } 
+     if (focusInputField.value === undefined) {
+       wm.innerText = "0";
      }
-  }
+})
+
+// User break time input 
+breakInputField.addEventListener('input', function() {
+  if(startTimer === undefined ) {
+    bm.innerText = breakInputField.value;
+     } 
+     if (breakInputField.value === undefined) {
+       bm.innerText = "0";
+     }
+
 })
 
 // Stop timer button
@@ -50,9 +66,9 @@ stop.addEventListener('click', function(){
 reset.addEventListener('click', function(){
   clearInterval(startTimer);
   startTimer = undefined;
-  wm.innerText = "00";
+  wm.innerText = "0";
   ws.innerText = "00";
-  bm.innerText = 1;
+  bm.innerText = "0";
   bs.innerText = "00";
 })
 
@@ -60,27 +76,34 @@ reset.addEventListener('click', function(){
 function timer() {
   if(ws.innerText != 0) {
     ws.innerText--;
+       // add leading zero to break seconds
+       if (ws.innerText <10 && ws.innerText != 0) {
+        ws.innerText = `0${ws.innerText}`;
+      }
   }else if(wm.innerText != 0 && ws.innerText == 0) {
     ws.innerText = 59;
     wm.innerText--;
-  }
-
+  } 
   if(wm.innerText == 0 && ws.innerText == 0) {
     if(bs.innerText != 0) {
       bs.innerText--;
+        // Add leading zero to work seconds < 10
+        if (bs.innerText <10 && bs.innerText != 0){
+        bs.innerText = `0${bs.innerText}`;
+        }
     } else if(bm.innerText != 0 && bs.innerText == 0){
       bs.innerText = 59;
       bm.innerText--;
     } else if (bm.innerText == 0 && bs.innerText == 0) {
       clearInterval(startTimer);
-      clearInterval(stop)
       startTimer = undefined;
-      wm.innerText = "00";
+      wm.innerText = "0";
       ws.innerText = "00";
-      bm.innerText = 1;
+      bm.innerText = "0";
       bs.innerText = "00";
       counter++;
       document.getElementById('counter-count').innerText = counter;
     }
   }
-}
+ }
+
