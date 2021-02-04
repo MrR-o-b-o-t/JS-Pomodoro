@@ -1,0 +1,18 @@
+body {
+  text-align: center;
+}
+
+.clock-face {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.input-fields {
+  margin: 0 0 15px 0;
+  display: inline-block;
+}
+/*# sourceMappingURL=main.css.map */

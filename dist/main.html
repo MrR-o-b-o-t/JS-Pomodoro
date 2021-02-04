@@ -1,0 +1,63 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Pomodoro Timer</title>
+    <meta name="Pomodor Study Timer" content="Vanilla JS & CSS Timer">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+    <!-- <link href="sass/style.css" rel="stylesheet"> -->
+    <link href="./css/main.css" rel="stylesheet">
+
+</head>
+
+<body onload="countDisplayCheck()">
+    
+    <header>
+        <h1>Pomodoro Timer</h1>
+    </header>
+
+    <div id="clock-container">
+        <div class="clock-face-container">
+        <h1>Focus Time</h1>
+        <div class="clock-face">
+            <h1 id="w-minutes">0</h1><h1>:</h1><h1 id="w-seconds">00</h1>
+        </div>
+        <h1>Break Time</h1>
+        <div class="clock-face">
+            <h1 id="b-minutes">0</h1><h1>:</h1><h1 id="b-seconds">00</h1>
+        </div>
+    </div>
+        <div class="input-fields">
+            <input class="text-center" type="text" id="focus-input" placeholder="Focus Minutes">
+        </div>
+        <div class="input-fields">
+            <input class="text-center" type="text" id="focus-break" placeholder="Break Minutes">
+        </div>
+        <div id="action">
+            <button button type="button" class="btn-outline-success" id="start">Start</button>
+            <button type="button" class="btn-outline-warning" id="reset">reset</button>
+            <button type="button" class="btn-outline-danger" id="stop">Stop</button>
+        </div>
+    </div>
+
+    <div class="counter">
+        <h1 id="counter-header">Counter</h1>
+        <h2 id="counter-count">0</h2>
+        <button type="button" class="btn-outline-danger" id="clear-count">Clear Count</button>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </script>
+</body>
+
+</html>

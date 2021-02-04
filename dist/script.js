@@ -1,6 +1,8 @@
 let start = document.getElementById('start');
 let reset = document.getElementById('reset');
 let stop = document.getElementById('stop');
+let clearCount = document.getElementById('clear-count');
+
 let countNum = 0;
 let counter = 0;
 
@@ -102,8 +104,21 @@ function timer() {
       bm.innerText = "0";
       bs.innerText = "00";
       counter++;
-      document.getElementById('counter-count').innerText = counter;
+      localStorage.setItem('count', counter);
+      console.log(counter);
+      console.log(localStorage.getItem('count'));
+      countDisplayCheck();
     }
   }
  }
 
+  function countDisplayCheck() {
+    counter = localStorage.getItem('count');
+    document.getElementById('counter-count').innerText = counter;
+}
+
+clearCount.addEventListener('click', function(){
+  localStorage.removeItem('count');
+  counter = 0;
+  document.getElementById('counter-count').innerText = counter;
+})
