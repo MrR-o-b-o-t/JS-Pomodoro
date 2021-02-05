@@ -4,12 +4,12 @@ body {
     text-align: $text-align;
 }
 
-.clock-face {     
-    display: flex;    
-    justify-content: center;    
-}
-
 .input-fields{
     margin: 0 0 15px 0;
     display: inline-block;
+}
+
+button {
+    margin: 0 5px 0 5px;
+    border-radius: 14px;
 }

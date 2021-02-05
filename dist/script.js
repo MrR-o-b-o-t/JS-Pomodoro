@@ -117,8 +117,8 @@ function timer() {
     document.getElementById('counter-count').innerText = counter;
 }
 
-clearCount.addEventListener('click', function(){
-  localStorage.removeItem('count');
-  counter = 0;
-  document.getElementById('counter-count').innerText = counter;
-})
+  clearCount.addEventListener('click', function(){
+    localStorage.removeItem('count');
+    counter = 0;
+    document.getElementById('counter-count').innerText = counter;
+  })
