@@ -11,4 +11,23 @@ button {
   margin: 0 5px 0 5px;
   border-radius: 14px;
 }
+
+header{
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.clock-face{
+  display: flex;
+  justify-content: center;
+}
+
+.input-fields{
+  margin: 0 0 15px 0;
+  display: inline-block;
+}
+
+input {
+  text-align: center;
+}
 /*# sourceMappingURL=main.css.map */
