@@ -4,10 +4,10 @@
 
 _This Pomodoro app was created with vanilla JavaScript, HTML5, CSS3 and the Quotable REST API._
 <br>
-See it here: https://web-dev-jr.github.io/Todo-App/
+See it here: https://web-dev-jr.github.io/JS-Pomodor/
 <br>
 <br>
-<image src="images/PA.PNG">
+<image src="./images/PA.PNG">
   
 ## Summary
 
