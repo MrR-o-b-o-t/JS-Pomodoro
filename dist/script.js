@@ -74,7 +74,7 @@ reset.addEventListener('click', function(){
   bs.innerText = "00";
 })
 
-// Decrement seconds and minutes after timer start
+// Decrement seconds and minutes after timer starts
 function timer() {
   if(ws.innerText != 0) {
     ws.innerText--;
@@ -105,20 +105,47 @@ function timer() {
       bs.innerText = "00";
       counter++;
       localStorage.setItem('count', counter);
-      console.log(counter);
-      console.log(localStorage.getItem('count'));
       countDisplayCheck();
+      timerEndAlert();
     }
   }
  }
 
+  // Update completed cycle counter from broswer storage on page load
+  const checkCounter = document.body.addEventListener("load", countDisplayCheck());
   function countDisplayCheck() {
     counter = localStorage.getItem('count');
     document.getElementById('counter-count').innerText = counter;
 }
 
+  // Clear counter count on button click
   clearCount.addEventListener('click', function(){
     localStorage.removeItem('count');
     counter = 0;
     document.getElementById('counter-count').innerText = counter;
   })
+
+  // Quoteoftheday API for completed timer alert quote
+  const quote = document.getElementById("quoteBody");
+  const cite = document.getElementById("quoteCite");
+  async function updateQuote() {
+    // Fetch a random quote from the Quotable API
+    const response = await fetch("https://api.quotable.io/random?tags=inspiration|inspirational|inspire");
+    const data = await response.json();
+    if (response.ok) {
+      // Update DOM elements
+      quote.innerText = data.content;
+      cite.innerText = ` -${data.author} `;
+    } else {
+      quote.textContent = "An error occured";
+    }
+  }
+  
+  // Play end timer audio and display modal
+  function timerEndAlert() {
+    const audioSound = document.getElementById("myAudio");
+    audioSound.play();
+    $('#myModal').modal();
+    updateQuote()
+  }
+

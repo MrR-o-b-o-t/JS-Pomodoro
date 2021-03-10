@@ -17,7 +17,7 @@
 
 </head>
 
-<body onload="countDisplayCheck()">
+<body>
     
     <header class="row justify-content-center mt-3">
         <h1>Pomodoro Timer</h1>
@@ -71,6 +71,32 @@
         <h2 id="counter-count">0</h2>
         <button type="button" class="btn-outline-danger mt-2" id="clear-count">Clear Count</button>
     </div>
+
+    <!-- Timer End Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="Timer Done" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <audio id="myAudio">
+            <source src="./images/198841__bone666138__analog-alarm-clock.wav" type="audio/wav">
+                Your browser does not support the audio element.
+        </audio>
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title text-center" id="exampleModalLongTitle">Timer End</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            <h3 id="quoteBody"></h3>
+            <p id="quoteCite"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
     <!-- End -->
 
     <script src="script.js"></script>
