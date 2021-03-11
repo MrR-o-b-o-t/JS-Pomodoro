@@ -1,0 +1,28 @@
+$
+
+@mixin boldRobCenter {
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+}
+
+  body {
+    text-align: center;
+  }
+  
+  header {
+    @include boldRobCenter();
+  }
+  
+  .input-fields {
+    margin: 0 0 15px 0;
+    display: inline-block;
+  }
+  
+  button {
+    margin: 0 3px 0 3px;
+  }
+  
+  input {
+    text-align: center;
+  }

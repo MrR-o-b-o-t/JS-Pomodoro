@@ -2,19 +2,14 @@ let start = document.getElementById('start');
 let reset = document.getElementById('reset');
 let stop = document.getElementById('stop');
 let clearCount = document.getElementById('clear-count');
-
 let countNum = 0;
 let counter = 0;
-
 let focusInputField = document.getElementById('focus-input');
 let breakInputField = document.getElementById('focus-break');
-
 let wm = document.getElementById('w-minutes');
 let ws = document.getElementById('w-seconds');
-
 let bm = document.getElementById('b-minutes');
 let bs = document.getElementById('b-seconds');
-
 let startTimer;
 
 // Start timer button
@@ -79,7 +74,7 @@ function timer() {
   if(ws.innerText != 0) {
     ws.innerText--;
        // add leading zero to break seconds
-       if (ws.innerText <10 && ws.innerText != 0) {
+       if (ws.innerText <10) {
         ws.innerText = `0${ws.innerText}`;
       }
   }else if(wm.innerText != 0 && ws.innerText == 0) {
@@ -90,7 +85,7 @@ function timer() {
     if(bs.innerText != 0) {
       bs.innerText--;
         // Add leading zero to work seconds < 10
-        if (bs.innerText <10 && bs.innerText != 0){
+        if (bs.innerText <10){
         bs.innerText = `0${bs.innerText}`;
         }
     } else if(bm.innerText != 0 && bs.innerText == 0){
@@ -103,8 +98,6 @@ function timer() {
       ws.innerText = "00";
       bm.innerText = "0";
       bs.innerText = "00";
-      counter++;
-      localStorage.setItem('count', counter);
       countDisplayCheck();
       timerEndAlert();
     }
@@ -112,13 +105,22 @@ function timer() {
  }
 
   // Update completed cycle counter from broswer storage on page load
-  const checkCounter = document.body.addEventListener("load", countDisplayCheck());
-  function countDisplayCheck() {
-    counter = localStorage.getItem('count');
-    document.getElementById('counter-count').innerText = counter;
+//   const checkCounter = document.body.addEventListener("load", countDisplayCheck());
+//   function countDisplayCheck() {
+//     counter = localStorage.getItem('count');
+//     if(counter = 'null') {
+//       counter = 0;
+//     }
+//     document.getElementById('counter-count').innerText = counter;
+// }
+
+function countDisplayCheck() {
+  counter++;
+  localStorage.setItem('count', counter);
+  document.getElementById('counter-count').innerText = counter;
 }
 
-  // Clear counter count on button click
+  // Clear counter on button click
   clearCount.addEventListener('click', function(){
     localStorage.removeItem('count');
     counter = 0;
