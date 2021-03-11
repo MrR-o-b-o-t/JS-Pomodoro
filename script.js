@@ -150,4 +150,4 @@ function countDisplayCheck() {
     $('#myModal').modal();
     updateQuote()
   }
-
+          
