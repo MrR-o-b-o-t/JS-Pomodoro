@@ -1,15 +1,13 @@
-let start = document.getElementById('start');
-let reset = document.getElementById('reset');
-let stop = document.getElementById('stop');
-let clearCount = document.getElementById('clear-count');
-let countNum = 0;
-let counter = 0;
-let focusInputField = document.getElementById('focus-input');
-let breakInputField = document.getElementById('focus-break');
-let wm = document.getElementById('w-minutes');
-let ws = document.getElementById('w-seconds');
-let bm = document.getElementById('b-minutes');
-let bs = document.getElementById('b-seconds');
+const start = document.getElementById('start');
+const reset = document.getElementById('reset');
+const stop = document.getElementById('stop');
+const clearCount = document.getElementById('clear-count');
+const focusInputField = document.getElementById('focus-input');
+const breakInputField = document.getElementById('focus-break');
+const wm = document.getElementById('w-minutes');
+const ws = document.getElementById('w-seconds');
+const bm = document.getElementById('b-minutes');
+const bs = document.getElementById('b-seconds');
 let startTimer;
 
 // Start timer button
@@ -104,27 +102,34 @@ function timer() {
   }
  }
 
-  // Update completed cycle counter from broswer storage on page load
-//   const checkCounter = document.body.addEventListener("load", countDisplayCheck());
-//   function countDisplayCheck() {
-//     counter = localStorage.getItem('count');
-//     if(counter = 'null') {
-//       counter = 0;
-//     }
-//     document.getElementById('counter-count').innerText = counter;
-// }
-
-function countDisplayCheck() {
+ function countDisplayCheck() {
+  counter = localStorage.getItem('count');
+  counterNode = document.querySelector('#counter-node');
   counter++;
   localStorage.setItem('count', counter);
-  document.getElementById('counter-count').innerText = counter;
+  counterNode.innerText = localStorage.getItem('count');
+}
+
+  // Update completed cycle counter from broswer storage on page load
+    window.onload = function countDisplayUpdate() {
+      let storedCount = localStorage.getItem('count');
+      if(storedCount === null) {
+        storedCount = 0;
+      }
+      console.log(storedCount);
+      let pElement = document.createElement('p');
+      pElement.setAttribute('id', "counter-node");
+      let pElementText = document.createTextNode(storedCount);
+      pElement.appendChild(pElementText);
+      let parent = document.querySelector('#counter-header');
+      parent.appendChild(pElement);
 }
 
   // Clear counter on button click
   clearCount.addEventListener('click', function(){
-    localStorage.removeItem('count');
-    counter = 0;
-    document.getElementById('counter-count').innerText = counter;
+    localStorage.setItem('count', 0);
+    counterNode = document.querySelector('#counter-node');
+    counterNode.innerText = localStorage.getItem('count');
   })
 
   // Quoteoftheday API for completed timer alert quote
@@ -151,3 +156,46 @@ function countDisplayCheck() {
     updateQuote()
   }
           
+  // var oktaSignIn = new OktaSignIn({
+  //   baseUrl: "https://dev-70746537.okta.com",
+  //   clientId: "0oabhudxi6ZwiOiOu5d6",
+  //   authParams: {
+  //     issuer: "https://dev-70746537.okta.com/oauth2/default",
+  //     responseType: ['token', 'id_token'],
+  //     display: 'page'
+  //   }
+  // });
+
+  // if (oktaSignIn.token.hasTokensInUrl()) {
+  //   oktaSignIn.token.parseTokensFromUrl(
+  //     // If we get here, the user just logged in.
+  //     function success(res) {
+  //       var accessToken = res[0];
+  //       var idToken = res[1];
+
+  //       oktaSignIn.tokenManager.add('accessToken', accessToken);
+  //       oktaSignIn.tokenManager.add('idToken', idToken);
+
+  //       window.location.hash='';
+  //       document.getElementById("messageBox").innerHTML = "Hello, " + idToken.claims.email + "! You just logged in!";
+  //     },
+  //     function error(err) {
+  //       console.error(err);
+  //     }
+  //   );
+  // } else {
+  //   oktaSignIn.session.get(function (res) {
+  //     // If we get here, the user is already signed in.
+  //     if (res.status === 'ACTIVE') {
+  //       document.getElementById("messageBox").innerHTML = "Hello, " + res.login + "! You are logged in!";
+  //       return;
+  //     }
+  //     oktaSignIn.renderEl(
+  //       { el: '#okta-login-container' },
+  //       function success(res) {},
+  //       function error(err) {
+  //         console.error(err);
+  //       }
+  //     );
+  //   });
+  // }

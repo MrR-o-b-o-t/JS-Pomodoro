@@ -4,11 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-
     <title>Pomodoro Timer</title>
     <meta name="Pomodor Study Timer" content="Vanilla JS & CSS Timer">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
@@ -23,9 +21,7 @@
     <header class="row justify-content-center mt-3">
         <h1>Pomodoro Timer</h1>
     </header>
-    <!-- Login container for Okta authentication -->
-    <div id="okta-login-container"></div>
-
+    <div id="messageBox"></div>
     <div class="row mt-5">
         <div class="col-md-6">
         <div>
@@ -71,7 +67,6 @@
     <!-- Completed Cycles Counter -->
     <div class="counter mt-5">
         <h1 id="counter-header">Counter</h1>
-        <h4 id="counter-count">0</h4>
         <button type="button" class="btn-outline-danger mt-2" id="clear-count">Clear Count</button>
     </div>
 
@@ -106,53 +101,51 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    </script>
-    <script type="text/javascript">
-        var oktaSignIn = new OktaSignIn({
-          baseUrl: "https://dev-70746537.okta.com",
-          clientId: "0oabhudxi6ZwiOiOu5d6",
-          authParams: {
-            issuer: "https://dev-70746537.okta.com/oauth2/default",
-            responseType: ['token', 'id_token'],
-            display: 'page'
-          }
-        });
-      
-        if (oktaSignIn.token.hasTokensInUrl()) {
-          oktaSignIn.token.parseTokensFromUrl(
-            // If we get here, the user just logged in.
-            function success(res) {
-              var accessToken = res[0];
-              var idToken = res[1];
-      
-              oktaSignIn.tokenManager.add('accessToken', accessToken);
-              oktaSignIn.tokenManager.add('idToken', idToken);
-      
-              window.location.hash='';
-              document.getElementById("messageBox").innerHTML = "Hello, " + idToken.claims.email + "! You just logged in! :)";
-            },
-            function error(err) {
-              console.error(err);
-            }
-          );
-        } else {
-          oktaSignIn.session.get(function (res) {
-            // If we get here, the user is already signed in.
-            if (res.status === 'ACTIVE') {
-              document.getElementById("messageBox").innerHTML = "Hello, " + res.login + "! You are *still* logged in! :)";
-              return;
-            }
-            oktaSignIn.renderEl(
-              { el: '#okta-login-container' },
-              function success(res) {},
-              function error(err) {
-                console.error(err);
-              }
-            );
-          });
-        }
-      </script>
+    <script>
+          var oktaSignIn = new OktaSignIn({
+    baseUrl: "https://dev-70746537.okta.com",
+    clientId: "0oabhudxi6ZwiOiOu5d6",
+    authParams: {
+      issuer: "https://dev-70746537.okta.com/oauth2/default",
+      responseType: ['token', 'id_token'],
+      display: 'page'
+    }
+  });
 
+  if (oktaSignIn.token.hasTokensInUrl()) {
+    oktaSignIn.token.parseTokensFromUrl(
+      // If we get here, the user just logged in.
+      function success(res) {
+        var accessToken = res[0];
+        var idToken = res[1];
+
+        oktaSignIn.tokenManager.add('accessToken', accessToken);
+        oktaSignIn.tokenManager.add('idToken', idToken);
+
+        window.location.hash='';
+        document.getElementById("messageBox").innerHTML = "Hello, " + idToken.claims.email + "! You just logged in!";
+      },
+      function error(err) {
+        console.error(err);
+      }
+    );
+  } else {
+    oktaSignIn.session.get(function (res) {
+      // If we get here, the user is already signed in.
+      if (res.status === 'ACTIVE') {
+        document.getElementById("messageBox").innerHTML = "Hello, " + res.login + "! You are logged in!";
+        return;
+      }
+      oktaSignIn.renderEl(
+        { el: '#okta-login-container' },
+        function success(res) {},
+        function error(err) {
+          console.error(err);
+        }
+      );
+    });
+  }
+    </script>
 </body>
 
 </html>
