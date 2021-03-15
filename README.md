@@ -3,6 +3,7 @@
 <br>
 
 _This Pomodoro app was created with vanilla JavaScript, HTML5, SASS, uses local storage for timer counts and the Quotable REST API for inspirational quotes after each cycle completes. 
+<br>
 **UPDATE**
 I have updated this app with user authentication via Okta. The difficulty of this was oddly compounded by the application being so simple. I spent several days researching a workaround for deploying the app to heroku by leveraging php, making Okta communicate properly with heroku and the workaround deployment, and finally getting the redirect from our login page to pass our token properly to our main app page. I'm extremely grateful for the help of the staff at Okta and other developers who generously took the time to work on this with me!_
 <br>
