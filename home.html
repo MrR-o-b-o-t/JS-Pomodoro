@@ -62,7 +62,7 @@
     oktaSignIn.session.get(function (res) {
       // If we get here, the user is already signed in.
       if (res.status === 'ACTIVE') {
-        document.getElementById("messageBox").innerHTML = "Hello, " + res.login + "! You are logged in!" + `<br>` + "Click here to return to Pomodoro Timer!" +"https://pomodoro-timer-wdj.herokuapp.com/main.html";
+        document.getElementById("messageBox").innerHTML = "Hello, " + res.login + "! You are logged in!" + `<br>` + "Click here to return to Pomodoro Timer!" + "<br>" +`<button button type="button" class="btn-outline-success">Click Here</button>`;
         return;
       }
       oktaSignIn.renderEl(
