@@ -116,7 +116,6 @@ function timer() {
       if(storedCount === null) {
         storedCount = 0;
       }
-      console.log(storedCount);
       let pElement = document.createElement('p');
       pElement.setAttribute('id', "counter-node");
       let pElementText = document.createTextNode(storedCount);
@@ -154,6 +153,44 @@ function timer() {
     audioSound.play();
     $('#myModal').modal();
     updateQuote()
+  }
+
+  var oktaSignIn = new OktaSignIn({
+    baseUrl: "https://dev-70746537.okta.com",
+    clientId: "0oabhudxi6ZwiOiOu5d6",
+    signOutLink: 'https://www.signmeout.com',
+    authParams: {
+      issuer: "https://dev-70746537.okta.com/oauth2/default",
+      responseType: ['token', 'id_token'],
+      display: 'page'
+    }
+  });
+
+  if (oktaSignIn.token.hasTokensInUrl()) {
+    oktaSignIn.token.parseTokensFromUrl(
+      // If we get here, the user just logged in.
+      function success(res) {
+        var accessToken = res[0];
+        var idToken = res[1];
+
+        oktaSignIn.tokenManager.add('accessToken', accessToken);
+        oktaSignIn.tokenManager.add('idToken', idToken);
+
+        window.location.hash='';
+        document.getElementById("messageBox").innerHTML = "Hello, " + idToken.claims.email + "! You just logged in!";
+      },
+      function error(err) {
+        console.error(err);
+      }
+    );
+  } else {
+    oktaSignIn.session.get(function (res) {
+      // If we get here, the user is already signed in.
+      if (res.status === 'ACTIVE') {
+        document.getElementById("messageBox").innerHTML = "Hello, " + res.login + "! You are logged in!";
+        return;
+      }
+    });
   }
           
   // var oktaSignIn = new OktaSignIn({

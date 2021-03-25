@@ -17,12 +17,12 @@
 </head>
 
 <body>
-    
+  <container class="main">
     <header class="row justify-content-center mt-3">
         <h1>Pomodoro Timer</h1>
     </header>
     <div id="okta-login-container"></div>
-    <div class="row mt-5">
+    <!-- <div class="row mt-5">
         <div class="col-md-6">
         <div>
             <h1>Focus Time</h1>
@@ -33,17 +33,19 @@
             <h1>Break Time</h1>
         </div>
         </div>
-    </div>
+    </div> -->
 
      <!-- Focus Time & Break Time Row -->
-    <div class="row mb-5">
-        <div class="col-md-6">
+    <div class="row p-5">
+        <div class="col-md-12">
             <div class="d-flex justify-content-center">
+            <h1 class="pr-5">Focus Time</h1>
             <h1 id="w-minutes">0</h1><h1>:</h1><h1 id="w-seconds">00</h1>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="d-flex justify-content-center">
+            <h1 class="pr-5">Break Time</h1>
             <h1 id="b-minutes">0</h1><h1>:</h1><h1 id="b-seconds">00</h1>
             </div>
         </div>
@@ -69,7 +71,7 @@
         <h1 id="counter-header">Counter</h1>
         <button type="button" class="btn-outline-danger mt-2" id="clear-count">Clear Count</button>
     </div>
-
+  </container>
     <!-- Timer End Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="Timer Done" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -101,53 +103,10 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-   
-    <script>
-          var oktaSignIn = new OktaSignIn({
-    baseUrl: "https://dev-70746537.okta.com",
-    clientId: "0oabhudxi6ZwiOiOu5d6",
-    authParams: {
-      issuer: "https://dev-70746537.okta.com/oauth2/default",
-      responseType: ['token', 'id_token'],
-      display: 'page'
-    }
-  });
 
-  if (oktaSignIn.token.hasTokensInUrl()) {
-    oktaSignIn.token.parseTokensFromUrl(
-      // If we get here, the user just logged in.
-      function success(res) {
-        var accessToken = res[0];
-        var idToken = res[1];
-
-        oktaSignIn.tokenManager.add('accessToken', accessToken);
-        oktaSignIn.tokenManager.add('idToken', idToken);
-
-        window.location.hash='';
-        document.getElementById("messageBox").innerHTML = "Hello, " + idToken.claims.email + "! You just logged in!";
-      },
-      function error(err) {
-        console.error(err);
-      }
-    );
-  } else {
-    oktaSignIn.session.get(function (res) {
-      // If we get here, the user is already signed in.
-      if (res.status === 'ACTIVE') {
-        document.getElementById("messageBox").innerHTML = "Hello, " + res.login + "! You are logged in!";
-        return;
-      }
-      // oktaSignIn.renderEl(
-      //   { el: '#okta-login-container' },
-      //   function success(res) {},
-      //   function error(err) {
-      //     console.error(err);
-      //   }
-      // );
-    });
-  }
-    </script>
-    <div id="messageBox"></div>
+    <footer class="footer">
+      <p id="messageBox"></p>
+    </footer>
 </body>
 
 </html>
