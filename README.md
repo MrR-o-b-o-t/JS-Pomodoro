@@ -4,7 +4,7 @@
 
 _This Pomodoro app was created with vanilla JavaScript, HTML5, SASS, uses local storage for timer counts and the Quotable REST API for inspirational quotes after each cycle completes._
 <br>
-See it here: https://web-dev-jr.github.io/JS-Pomodor/
+See it here: https://pomodoro-timer-wdj.herokuapp.com/
 <br>
 <br>
 <image src="./images/PA.png">
