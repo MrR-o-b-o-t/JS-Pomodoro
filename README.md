@@ -1,4 +1,4 @@
-# Vanilla Javascript Pomodoro App
+## Vanilla Javascript Pomodoro App
 
 <br>
 
